@@ -1,12 +1,20 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import BottomNav from "../../components/BottomNav";
+import {
+  useEffect,
+  useState,
+} from "react";
+
+import Link from "next/link";
+
+import {
+  useRouter,
+} from "next/navigation";
 
 export default function RegisterPage() {
 
-  const router = useRouter();
+  const router =
+    useRouter();
 
   const [phone, setPhone] =
     useState("");
@@ -14,16 +22,42 @@ export default function RegisterPage() {
   const [password, setPassword] =
     useState("");
 
-  const [withdrawPassword,
-    setWithdrawPassword] =
-    useState("");
+  const [
+    withdrawPassword,
+    setWithdrawPassword,
+  ] = useState("");
 
-  const [referralCode,
-    setReferralCode] =
-    useState("");
+  const [
+    referralCode,
+    setReferralCode,
+  ] = useState("");
 
   const [loading, setLoading] =
     useState(false);
+
+  /* =========================
+     AUTO REDIRECT
+  ========================= */
+
+  useEffect(() => {
+
+    const token =
+      localStorage.getItem(
+        "token"
+      );
+
+    if (token) {
+
+      window.location.href =
+        "/dashboard";
+
+    }
+
+  }, []);
+
+  /* =========================
+     REGISTER
+  ========================= */
 
   const handleRegister =
     async () => {
@@ -31,9 +65,13 @@ export default function RegisterPage() {
       try {
 
         if (
+
           !phone ||
+
           !password ||
+
           !withdrawPassword
+
         ) {
 
           alert(
@@ -49,7 +87,19 @@ export default function RegisterPage() {
         ) {
 
           alert(
-            "Phone Number Must Be 10 Digits"
+            "Phone Must Be 10 Digits"
+          );
+
+          return;
+
+        }
+
+        if (
+          password.length < 6
+        ) {
+
+          alert(
+            "Password Minimum 6 Characters"
           );
 
           return;
@@ -61,7 +111,7 @@ export default function RegisterPage() {
         ) {
 
           alert(
-            "Withdraw Password Must Be Minimum 4 Digits"
+            "Withdraw Password Minimum 4 Digits"
           );
 
           return;
@@ -72,14 +122,18 @@ export default function RegisterPage() {
 
         const response =
           await fetch(
+
             "https://client-website-3rw8.onrender.com/api/auth/register",
+
             {
 
               method: "POST",
 
               headers: {
+
                 "Content-Type":
                   "application/json",
+
               },
 
               body: JSON.stringify({
@@ -95,6 +149,7 @@ export default function RegisterPage() {
               }),
 
             }
+
           );
 
         const data =
@@ -102,13 +157,26 @@ export default function RegisterPage() {
 
         if (data.success) {
 
-          alert(
-            "Registration Successful"
+          localStorage.setItem(
+
+            "token",
+
+            data.token
+
           );
 
-          router.push(
-            "/login"
+          localStorage.setItem(
+
+            "user",
+
+            JSON.stringify(
+              data.user
+            )
+
           );
+
+          window.location.href =
+            "/dashboard";
 
         } else {
 
@@ -136,100 +204,89 @@ export default function RegisterPage() {
 
   return (
 
-    <div className="min-h-screen bg-black text-white px-4 py-6 pb-28 overflow-hidden relative">
+    <div className="min-h-screen bg-black text-white px-5 py-8 overflow-hidden relative flex items-center justify-center">
 
-      {/* GLOW */}
+      {/* BACKGROUND */}
 
-      <div className="absolute top-0 left-[-120px] w-72 h-72 bg-pink-500/10 rounded-full blur-3xl">
+      <div className="absolute top-0 left-[-120px] w-80 h-80 bg-pink-500/10 rounded-full blur-3xl">
       </div>
 
-      <div className="absolute top-[45%] right-[-120px] w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl">
+      <div className="absolute bottom-0 right-[-120px] w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl">
       </div>
 
-      <div className="absolute bottom-0 left-[20%] w-72 h-72 bg-purple-500/10 rounded-full blur-3xl">
-      </div>
+      {/* CARD */}
 
-      <div className="max-w-md mx-auto relative z-10">
+      <div className="w-full max-w-md relative z-10">
 
-        {/* HEADER */}
-
-        <div className="text-center mb-8">
-
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-pink-500/10 border border-pink-500/20 shadow-[0_0_25px_rgba(236,72,153,0.15)]">
-
-            <div className="w-2 h-2 rounded-full bg-pink-400 animate-ping">
-            </div>
-
-            <p className="text-pink-400 font-bold text-xs tracking-[4px]">
-              CREATE ACCOUNT
-            </p>
-
-          </div>
-
-          <h1 className="text-5xl font-black mt-5 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-500 to-cyan-400 drop-shadow-[0_0_25px_rgba(168,85,247,0.8)] animate-pulse">
-
-            REGISTER
-
-          </h1>
-
-          <p className="text-gray-400 mt-4 text-sm leading-7 px-4">
-
-            Create your Luxora account
-            and start earning with VIP
-            investment plans.
-
-          </p>
-
-        </div>
-
-        {/* FORM CARD */}
-
-        <div className="relative bg-zinc-900 rounded-[38px] p-5 border border-white/10 shadow-[0_0_40px_rgba(255,255,255,0.05)] overflow-hidden">
+        <div className="bg-zinc-900 border border-white/10 rounded-[40px] p-7 shadow-[0_0_40px_rgba(255,255,255,0.05)] overflow-hidden relative">
 
           <div className="absolute -top-20 -right-10 w-52 h-52 bg-pink-500/10 rounded-full blur-3xl">
           </div>
 
-          <div className="absolute bottom-0 left-0 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl">
-          </div>
-
           <div className="relative z-10">
+
+            {/* HEADER */}
+
+            <div className="text-center mb-8">
+
+              <h1 className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-500 to-cyan-400">
+
+                Luxora
+
+              </h1>
+
+              <p className="text-gray-400 mt-4">
+
+                Create Your Account 🚀
+
+              </p>
+
+            </div>
+
+            {/* INPUTS */}
 
             <div className="space-y-5">
 
               <input
-                type="number"
-                placeholder="Enter Phone Number"
+                type="text"
+                placeholder="Phone Number"
                 value={phone}
                 onChange={(e) =>
                   setPhone(
-                    e.target.value
+
+                    e.target.value.replace(
+                      /\\D/g,
+                      ""
+                    )
+
                   )
                 }
-                className="w-full bg-black/40 border border-white/10 rounded-3xl px-5 py-4 outline-none focus:border-pink-500 focus:shadow-[0_0_20px_rgba(236,72,153,0.2)] transition-all duration-300"
+                maxLength={10}
+                className="w-full bg-black/40 border border-white/10 rounded-3xl px-5 py-4 outline-none focus:border-pink-500 transition-all"
               />
 
               <input
                 type="password"
-                placeholder="Create Login Password"
+                placeholder="Login Password"
                 value={password}
                 onChange={(e) =>
                   setPassword(
                     e.target.value
                   )
                 }
-                className="w-full bg-black/40 border border-white/10 rounded-3xl px-5 py-4 outline-none focus:border-purple-500 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300"
+                className="w-full bg-black/40 border border-white/10 rounded-3xl px-5 py-4 outline-none focus:border-purple-500 transition-all"
               />
 
               <input
                 type="password"
-                placeholder="Create Withdraw Password"
+                placeholder="Withdraw Password"
                 value={withdrawPassword}
                 onChange={(e) =>
                   setWithdrawPassword(
                     e.target.value
                   )
                 }
-                className="w-full bg-black/40 border border-white/10 rounded-3xl px-5 py-4 outline-none focus:border-cyan-500 focus:shadow-[0_0_20px_rgba(6,182,212,0.2)] transition-all duration-300"
+                className="w-full bg-black/40 border border-white/10 rounded-3xl px-5 py-4 outline-none focus:border-cyan-500 transition-all"
               />
 
               <input
@@ -241,90 +298,47 @@ export default function RegisterPage() {
                     e.target.value
                   )
                 }
-                className="w-full bg-black/40 border border-white/10 rounded-3xl px-5 py-4 outline-none focus:border-green-500 focus:shadow-[0_0_20px_rgba(34,197,94,0.2)] transition-all duration-300"
+                className="w-full bg-black/40 border border-white/10 rounded-3xl px-5 py-4 outline-none focus:border-green-500 transition-all"
               />
-
-            </div>
-
-            {/* NOTICE */}
-
-            <div className="relative bg-black/40 border border-white/10 rounded-[30px] p-5 mt-7 overflow-hidden">
-
-              <div className="absolute inset-0 opacity-10 bg-gradient-to-r from-pink-500 to-cyan-500">
-              </div>
-
-              <div className="relative z-10 flex items-center justify-between">
-
-                <div>
-
-                  <p className="text-pink-400 font-black text-lg">
-                    Secure Registration
-                  </p>
-
-                  <p className="text-sm text-gray-400 mt-2 leading-6">
-
-                    Keep your login and
-                    withdraw passwords safe.
-
-                  </p>
-
-                </div>
-
-                <div className="text-5xl opacity-20">
-                  🔐
-                </div>
-
-              </div>
 
             </div>
 
             {/* BUTTON */}
 
             <button
-              onClick={
-                handleRegister
-              }
+              onClick={handleRegister}
               disabled={loading}
-              className="relative overflow-hidden w-full bg-gradient-to-r from-pink-600 via-purple-500 to-cyan-500 py-4 rounded-3xl font-black text-lg tracking-wide shadow-xl hover:shadow-[0_0_40px_rgba(168,85,247,0.35)] hover:scale-105 active:scale-95 transition-all duration-300 mt-7"
+              className="w-full mt-7 bg-gradient-to-r from-pink-600 via-purple-500 to-cyan-500 py-4 rounded-3xl font-black text-lg hover:scale-105 active:scale-95 transition-all duration-300"
             >
 
-              <span className="absolute inset-0 opacity-0 hover:opacity-100 transition-all duration-1000 bg-[linear-gradient(110deg,transparent,rgba(255,255,255,0.45),transparent)] translate-x-[-200%] hover:translate-x-[200%]">
-              </span>
+              {
 
-              <span className="relative z-10">
+                loading
 
-                {loading
                   ? "CREATING ACCOUNT..."
-                  : "REGISTER NOW"}
 
-              </span>
+                  : "REGISTER NOW"
+
+              }
 
             </button>
 
             {/* LOGIN */}
 
-            <div className="text-center mt-6">
+            <p className="text-center text-gray-400 mt-7">
 
-              <p className="text-gray-400 text-sm">
+              Already have an account?
 
-                Already Have An Account?
-
-              </p>
-
-              <button
-                onClick={() =>
-                  router.push(
-                    "/login"
-                  )
-                }
-                className="mt-3 text-cyan-400 font-black text-lg"
+              <Link
+                href="/login"
+                className="text-cyan-400 font-black ml-2"
               >
 
-                LOGIN NOW
+                Login
 
-              </button>
+              </Link>
 
-            </div>
+            </p>
 
           </div>
 
@@ -332,9 +346,8 @@ export default function RegisterPage() {
 
       </div>
 
-      <BottomNav />
-
     </div>
 
   );
+
 }
