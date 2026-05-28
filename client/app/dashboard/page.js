@@ -5,14 +5,14 @@ import {
   useMemo,
 } from "react";
 
-import useAuth from "../hooks/useAuth";
-import useUser from "../hooks/useUser";
+import useAuth from "../../hooks/useAuth";
+import useUser from "../../hooks/useUser";
 
-import Loader from "../components/Loader";
-import Header from "../components/Header";
-import BottomNav from "../components/BottomNav";
-import WalletCard from "../components/WalletCard";
-import ActionGrid from "../components/ActionGrid";
+import Loader from "../../components/Loader";
+import Header from "../../components/Header";
+import BottomNav from "../../components/BottomNav";
+import WalletCard from "../../components/WalletCard";
+import ActionGrid from "../../components/ActionGrid";
 
 export default function HomePage() {
 
