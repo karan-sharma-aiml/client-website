@@ -1,0 +1,151 @@
+.vip-card {
+
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  border-radius:
+    36px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(250,204,21,1),
+      rgba(249,115,22,1)
+    );
+
+  padding:
+    1.5px;
+
+  box-shadow:
+    0 0 40px rgba(250,204,21,0.35);
+
+}
+
+.vip-inner {
+
+  background:
+    #111111;
+
+  border-radius:
+    36px;
+
+  padding:
+    24px;
+
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+}
+
+.vip-glow {
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(250,204,21,0.15),
+      transparent
+    );
+
+  filter:
+    blur(40px);
+
+}
+
+.vip-title {
+
+  font-size:
+    2rem;
+
+  font-weight:
+    900;
+
+  color:
+    #facc15;
+
+}
+
+.vip-price {
+
+  font-size:
+    3rem;
+
+  font-weight:
+    900;
+
+  margin-top:
+    12px;
+
+}
+
+.vip-feature {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    10px;
+
+  margin-top:
+    14px;
+
+  color:
+    #d1d5db;
+
+  font-size:
+    14px;
+
+}
+
+.vip-button {
+
+  width:
+    100%;
+
+  margin-top:
+    24px;
+
+  padding:
+    16px;
+
+  border-radius:
+    20px;
+
+  font-weight:
+    900;
+
+  background:
+    linear-gradient(
+      to right,
+      #facc15,
+      #f97316
+    );
+
+  color:
+    black;
+
+  transition:
+    all 0.3s ease;
+
+}
+
+.vip-button:hover {
+
+  transform:
+    scale(1.03);
+
+}
