@@ -68,7 +68,7 @@ export default function HistoryPage() {
         const rechargeRes =
           await fetch(
 
-            `http://localhost:5000/api/recharge/history/${parsedUser._id}`
+            `https://client-website-3rw8.onrender.com/api/recharge/history/${parsedUser._id}`
 
           );
 
@@ -90,7 +90,7 @@ export default function HistoryPage() {
         const withdrawRes =
           await fetch(
 
-            `http://localhost:5000/api/withdraw/history/${parsedUser._id}`
+            `https://client-website-3rw8.onrender.com/api/withdraw/history/${parsedUser._id}`
 
           );
 
@@ -112,7 +112,7 @@ export default function HistoryPage() {
         const vipRes =
           await fetch(
 
-            `http://localhost:5000/api/vip/history/${parsedUser._id}`
+            `https://client-website-3rw8.onrender.com/api/vip/history/${parsedUser._id}`
 
           );
 

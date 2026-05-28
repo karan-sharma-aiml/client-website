@@ -47,10 +47,10 @@ export default function AdminDashboard() {
       withdrawRes,
       historyRes,
     ] = await Promise.all([
-      fetch("http://localhost:5000/api/admin/dashboard"),
-      fetch("http://localhost:5000/api/recharge/pending"),
-      fetch("http://localhost:5000/api/withdraw/pending"),
-      fetch("http://localhost:5000/api/withdraw/all"),
+      fetch("https://client-website-3rw8.onrender.com/api/admin/dashboard"),
+      fetch("https://client-website-3rw8.onrender.com/api/recharge/pending"),
+      fetch("https://client-website-3rw8.onrender.com/api/withdraw/pending"),
+      fetch("https://client-website-3rw8.onrender.com/api/withdraw/all"),
     ]);
 
     const [
@@ -132,7 +132,7 @@ export default function AdminDashboard() {
 
         const response =
           await fetch(
-            "http://localhost:5000/api/recharge/approve",
+            "https://client-website-3rw8.onrender.com/api/recharge/approve",
             {
 
               method: "POST",
@@ -179,7 +179,7 @@ export default function AdminDashboard() {
 
         const response =
           await fetch(
-            "http://localhost:5000/api/recharge/reject",
+            "https://client-website-3rw8.onrender.com/api/recharge/reject",
             {
 
               method: "POST",
@@ -226,7 +226,7 @@ export default function AdminDashboard() {
 
         const response =
           await fetch(
-            "http://localhost:5000/api/withdraw/approve",
+            "https://client-website-3rw8.onrender.com/api/withdraw/approve",
             {
 
               method: "POST",
@@ -278,7 +278,7 @@ export default function AdminDashboard() {
 
         const response =
           await fetch(
-            "http://localhost:5000/api/withdraw/reject",
+            "https://client-website-3rw8.onrender.com/api/withdraw/reject",
             {
 
               method: "POST",

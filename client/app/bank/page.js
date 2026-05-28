@@ -74,7 +74,7 @@ export default function BankPage() {
 
         const response =
           await fetch(
-            "http://localhost:5000/api/user/bank/update",
+            "https://client-website-3rw8.onrender.com/api/user/bank/update",
             {
 
               method: "POST",

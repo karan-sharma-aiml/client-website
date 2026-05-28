@@ -72,7 +72,7 @@ export default function RegisterPage() {
 
         const response =
           await fetch(
-            "http://localhost:5000/api/auth/register",
+            "https://client-website-3rw8.onrender.com/api/auth/register",
             {
 
               method: "POST",

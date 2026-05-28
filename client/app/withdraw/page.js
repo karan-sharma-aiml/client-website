@@ -73,7 +73,7 @@ export default function WithdrawPage() {
         const response =
           await fetch(
 
-            `http://localhost:5000/api/withdraw/history/${userId}`
+            `https://client-website-3rw8.onrender.com/api/withdraw/history/${userId}`
 
           );
 
@@ -171,7 +171,7 @@ export default function WithdrawPage() {
         const response =
           await fetch(
 
-            "http://localhost:5000/api/withdraw/create",
+            "https://client-website-3rw8.onrender.com/api/withdraw/create",
 
             {
 

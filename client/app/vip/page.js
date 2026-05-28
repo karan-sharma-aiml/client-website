@@ -62,7 +62,7 @@ export default function VipPage() {
         const response =
           await fetch(
 
-            `http://localhost:5000/api/user/balance/${parsedUser._id}`,
+            `https://client-website-3rw8.onrender.com/api/user/balance/${parsedUser._id}`,
 
             {
 
@@ -256,7 +256,7 @@ export default function VipPage() {
         const response =
           await fetch(
 
-            "http://localhost:5000/api/vip/buy",
+            "https://client-website-3rw8.onrender.com/api/vip/buy",
 
             {
 
