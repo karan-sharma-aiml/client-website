@@ -3,6 +3,7 @@
 import {
   useEffect,
   useState,
+  Suspense,
 } from "react";
 
 import {
@@ -11,7 +12,7 @@ import {
 
 import BottomNav from "../../components/BottomNav";
 
-export default function RechargePage() {
+function RechargeContent() {
 
   const searchParams =
     useSearchParams();
@@ -900,4 +901,12 @@ export default function RechargePage() {
 
   );
 
+}
+
+export default function RechargePage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <RechargeContent />
+    </Suspense>
+  );
 }
